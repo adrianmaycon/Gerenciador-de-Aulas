@@ -9,7 +9,7 @@ package model;
  * @author mayco
  */
 public class ModelUsuario {
-    
+
     private int usuId;
     private String usuNome;
     private String usuLogin;
@@ -70,6 +70,5 @@ public class ModelUsuario {
     public void setUsuSenha(String usuSenha) {
         this.usuSenha = usuSenha;
     }
-    
-    
+
 }

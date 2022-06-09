@@ -15,6 +15,7 @@ public class ViewEstoque extends javax.swing.JFrame {
      */
     public ViewEstoque() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
