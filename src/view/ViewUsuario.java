@@ -55,6 +55,7 @@ public class ViewUsuario extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jbAlterar = new javax.swing.JButton();
+        jbAlterarConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,6 +129,13 @@ public class ViewUsuario extends javax.swing.JFrame {
             }
         });
 
+        jbAlterarConfirmar.setText("Alterar");
+        jbAlterarConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAlterarConfirmarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -144,24 +152,28 @@ public class ViewUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(84, 84, 84)
-                                    .addComponent(jLabel2))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jtfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jbSalvar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(84, 84, 84)
+                                        .addComponent(jLabel2))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jtfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGap(21, 21, 21)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jtfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jbSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jtfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jbAlterarConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -180,7 +192,9 @@ public class ViewUsuario extends javax.swing.JFrame {
                     .addComponent(jtfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jbSalvar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSalvar)
+                    .addComponent(jbAlterarConfirmar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -212,8 +226,9 @@ public class ViewUsuario extends javax.swing.JFrame {
         modelUsuario.setUsuNome(jtfNome.getText());
         modelUsuario.setUsuLogin(jtfLogin.getText());
         modelUsuario.setUsuSenha(String.valueOf(jtfSenha.getPassword()));
-        if (cadAlt.equals("cad")) {
-            if (controllerUsuario.salvarUsuarioController(modelUsuario)) {
+        controllerUsuario.salvarUsuarioController(modelUsuario);
+        
+        if (controllerUsuario.salvarUsuarioController(modelUsuario)) {
                 //cadastrou usuario
                 JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
                 
@@ -224,18 +239,6 @@ public class ViewUsuario extends javax.swing.JFrame {
                 //não cadastrouuuu
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar usuário", "Erro", JOptionPane.INFORMATION_MESSAGE);
             }
-        } else {
-            if (controllerUsuario.atualizarUsuarioController(modelUsuario)) {
-                //alterou usuario
-                JOptionPane.showMessageDialog(this, "Usuário alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
-                //limpeza de dados dos campos
-                limparFormulario();
-                carregarUsuarios();
-            } else {
-                //não alterou
-                JOptionPane.showMessageDialog(this, "Erro ao alterar usuário.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        }
     }//GEN-LAST:event_jbSalvarActionPerformed
 
     /**
@@ -310,6 +313,39 @@ public class ViewUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbAlterarActionPerformed
 
+    private void jbAlterarConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarConfirmarActionPerformed
+        // TODO add your handling code here:
+        modelUsuario = new ModelUsuario();
+        modelUsuario.setUsuId(Integer.parseInt(jtfCodigo.getText()));
+        modelUsuario.setUsuNome(jtfNome.getText());
+        modelUsuario.setUsuLogin(jtfLogin.getText());
+        modelUsuario.setUsuSenha(String.valueOf(jtfSenha.getPassword()));
+        if (cadAlt.equals("cad")) {
+            if (controllerUsuario.salvarUsuarioController(modelUsuario)) {
+                //cadastrou usuario
+                JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
+                
+                //limpar
+                limparFormulario();
+                carregarUsuarios();
+            } else {
+                //não cadastrouuuu
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar usuário", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            if (controllerUsuario.atualizarUsuarioController(modelUsuario)) {
+                //alterou usuario
+                JOptionPane.showMessageDialog(this, "Usuário alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+                //limpeza de dados dos campos
+                limparFormulario();
+                carregarUsuarios();
+            } else {
+                //não alterou
+                JOptionPane.showMessageDialog(this, "Erro ao alterar usuário.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jbAlterarConfirmarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -355,6 +391,7 @@ public class ViewUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbAlterar;
+    private javax.swing.JButton jbAlterarConfirmar;
     private javax.swing.JButton jbSalvar;
     private javax.swing.JTable jtUsuario;
     private javax.swing.JTextField jtfCodigo;

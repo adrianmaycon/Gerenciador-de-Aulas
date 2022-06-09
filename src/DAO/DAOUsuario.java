@@ -30,7 +30,7 @@ public class DAOUsuario extends ConexaoSQLite {
     public boolean salvarUsuarioDAO(ModelUsuario pModelUsuario) {
         conectar();
         // executar sql
-        String sql = "INSERT INTO tbl_usuario ("
+        String sql = "INSERT INTO tbl_usuario("
                 + "usu_nome, "
                 + "usu_login, "
                 + "usu_senha) "
